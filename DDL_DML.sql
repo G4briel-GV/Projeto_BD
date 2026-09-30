@@ -156,3 +156,24 @@ select * from leitor;
 
 DELETE FROM leitor 
 WHERE id_leitor = 2;
+
+-- comanndos de update. 'coloquei 4 por achar 2 pouco.'
+-- 1. dados de contato de um leitor
+UPDATE leitor 
+SET email = 'luis.novoemail@aluno.com', numero = '11988887777'
+WHERE id_leitor = 4;
+
+-- 2. status de um exemplar
+UPDATE exemplar 
+SET status = 'Emprestado'
+WHERE num_tombo = 1;
+
+-- 3. cancelando uma reserva
+UPDATE reserva 
+SET status_reserva = 'Cancelada'
+WHERE id_reserva = 12;
+
+-- 4. corrigindo o ano e a edição de um livro
+UPDATE livro 
+SET ano_publicacao = 2024, edicao = '2ª Edição'
+WHERE isbn = '978-85-1234-567';
