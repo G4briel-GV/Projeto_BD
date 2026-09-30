@@ -121,20 +121,21 @@ CREATE TABLE emprestimo (
 )
 -- 8 ITENS EMPRÉSTIMOS
 CREATE TABLE itens_emprestimo (
-    id_item_emprestimo INT PRIMARY KEY IDENTITY(1,1),
     id_emprestimo INT NOT NULL,
     num_tombo INT NOT NULL,
+    id_devolucao INT NULL,
+    CONSTRAINT PK_itens_emprestimo PRIMARY KEY (id_emprestimo, num_tombo),
     CONSTRAINT FK_ie_emprestimo FOREIGN KEY (id_emprestimo) REFERENCES emprestimo(id_emprestimo),
-    CONSTRAINT FK_ie_exemplar FOREIGN KEY (num_tombo) REFERENCES exemplar(num_tombo)
+    CONSTRAINT FK_ie_exemplar FOREIGN KEY (num_tombo) REFERENCES exemplar(num_tombo),
+    CONSTRAINT FK_ie_devolucao FOREIGN KEY (id_devolucao) REFERENCES devolucao(id_devolucao)
 )
 
 -- 9. DEVOLUÇÃO 
 CREATE TABLE devolucao (
     id_devolucao INT PRIMARY KEY IDENTITY(1,1),
-    dt_devolucao_real DATE NOT NULL,
-    id_item_emprestimo INT NOT NULL UNIQUE,
-    CONSTRAINT FK_dev_item FOREIGN KEY (id_item_emprestimo) REFERENCES itens_emprestimo(id_item_emprestimo)
+    dt_devolucao_real DATE NOT NULL
 )
+	
 -- 10. MULTA
 CREATE TABLE multa (
     id_multa INT PRIMARY KEY IDENTITY(1,1),
