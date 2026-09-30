@@ -157,6 +157,8 @@ select * from leitor;
 DELETE FROM leitor 
 WHERE id_leitor = 2;
 
+
+
 -- comanndos de update. 'coloquei 4 por achar 2 pouco.'
 -- 1. dados de contato de um leitor
 UPDATE leitor 
@@ -177,3 +179,32 @@ WHERE id_reserva = 12;
 UPDATE livro 
 SET ano_publicacao = 2024, edicao = '2ª Edição'
 WHERE isbn = '978-85-1234-567';
+
+-------------------------
+
+-- comandos select
+-- filtrando livros recentes de uma editora específica
+SELECT titulo, ano_publicacao 
+FROM livro 
+WHERE ano_publicacao > 2010 AND id_editora = 1;
+
+-- procurando leitores que usam email de aluno
+SELECT nome, email 
+FROM leitor 
+WHERE email LIKE '%@aluno.com%';
+
+-- verificando quais empréstimos ainda não foram devolvidos
+SELECT id_emprestimo, num_tombo 
+FROM itens_emprestimo 
+WHERE id_devolucao IS NULL;
+
+-- contando quantas reservas cada leitor fez 
+SELECT id_leitor, COUNT(id_reserva) AS total_reservas 
+FROM reserva 
+GROUP BY id_leitor 
+HAVING COUNT(id_reserva) > 1;
+
+-- listando os livros do mais novo para o mais antigo
+SELECT titulo, ano_publicacao 
+FROM livro 
+ORDER BY ano_publicacao DESC;
