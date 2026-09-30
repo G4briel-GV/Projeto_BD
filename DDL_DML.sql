@@ -97,9 +97,16 @@ CREATE TABLE reserva (
     dt_reserva DATE NOT NULL,
     status_reserva VARCHAR(30) NOT NULL,
     id_leitor INT NOT NULL,
+    CONSTRAINT FK_reserva_leitor FOREIGN KEY (id_leitor) REFERENCES leitor(id_leitor)
+)
+
+-- 6.1 ITENS_RESERVADOS
+CREATE TABLE itens_reservados (
+    id_reserva INT NOT NULL,
     num_tombo INT NOT NULL,
-    CONSTRAINT FK_reserva_leitor FOREIGN KEY (id_leitor) REFERENCES leitor(id_leitor),
-    CONSTRAINT FK_reserva_exemplar FOREIGN KEY (num_tombo) REFERENCES exemplar(num_tombo)
+    CONSTRAINT PK_itens_reservados PRIMARY KEY (id_reserva, num_tombo),
+    CONSTRAINT FK_ir_reserva FOREIGN KEY (id_reserva) REFERENCES reserva(id_reserva),
+    CONSTRAINT FK_ir_exemplar FOREIGN KEY (num_tombo) REFERENCES exemplar(num_tombo)
 )
 
 -- 7. EMPRÉSTIMO
